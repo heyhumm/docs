@@ -1,0 +1,68 @@
+---
+title: Creating Snowflake Private Keys
+description: How to generate and configure private keys for Snowflake integrations.
+---
+
+## 1. Generate an RSA Private Key
+
+Generate a 2048 or 4096-bit RSA private key:
+
+```bash
+# 2048-bit (fast, secure enough for most uses)
+openssl genrsa -out rsa_key.pem 2048
+
+# Or 4096-bit (stronger, slower)
+openssl genrsa -out rsa_key.pem 4096
+```
+
+## 2. Convert to PKCS#8 Format
+
+First, create an unencrypted PKCS#8 key:
+
+```bash
+openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in rsa_key.pem -out rsa_key.p8
+```
+
+Then, create an **encrypted** PKCS#8 key (Humm prefers encrypted keys):
+
+```bash
+openssl pkcs8 -topk8 -inform PEM -outform PEM -in rsa_key.pem -out rsa_key_encrypted.p8 -passout pass:YOUR_PASSPHRASE
+```
+
+## 3. Extract the Public Key
+
+```bash
+openssl rsa -in rsa_key.pem -pubout -out rsa_key.pub
+```
+
+## 4. Secure the Private Key File
+
+```bash
+chmod 600 rsa_key.p8
+# or
+chmod 600 rsa_key_encrypted.p8
+```
+
+<Warning>
+Store the private key file somewhere safe. Do **not** commit it to git.
+</Warning>
+
+## 5. Upload the Public Key to Snowflake
+
+Open Snowflake with a role that has user-admin rights and add the public key to the user that will authenticate.
+
+Copy the full contents of `rsa_key.pub` (including the header and footer lines) and run:
+
+```sql
+ALTER USER <YOUR_SNOWFLAKE_USER>
+  SET RSA_PUBLIC_KEY = '-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkq... (rest of key) ...
+-----END PUBLIC KEY-----';
+```
+
+## 6. Upload the Private Key to Humm
+
+1. Log into Humm and create a Snowflake integration
+2. Choose **Private Key** as the authentication method
+3. Upload the private key (`.p8` file)
+4. Enter the passphrase if you created an encrypted key

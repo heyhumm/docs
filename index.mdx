@@ -1,97 +1,109 @@
 ---
-title: "Introduction"
-description: "Welcome to the new home for your documentation"
+title: Introduction
+description: Humm is an analytics platform built for post-sale teams to stop churn, expand revenue, and boost productivity.
 ---
 
-## Setting up
+## What is Humm?
 
-Get your documentation site up and running in minutes.
+Humm is an analytics platform built specifically for Customer Success, Post-Sales, Growth Managers, and CX teams. It connects to your existing data sources and apps, letting you analyze customer health, spot risks, and find opportunities—all through simple, natural language questions.
 
-<Card
-  title="Start here"
-  icon="rocket"
-  href="/quickstart"
-  horizontal
->
-  Follow our three step quickstart guide.
-</Card>
+Think of Humm as having an analyst on your team who already knows your business, understands your data, and is available whenever you need answers.
 
-## Make it yours
+### What Humm helps you do
 
-Design a docs site that looks great and empowers your users.
-
-<Columns cols={2}>
-  <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
-  >
-    Edit your docs locally and preview them in real time.
+<CardGroup cols={3}>
+  <Card title="Spot Churn Risk Early">
+    Identify at-risk accounts, flag declining product usage, and analyze sentiment from calls and emails.
   </Card>
-  <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
-  >
-    Customize the design and colors of your site to match your brand.
+  <Card title="Find New Revenue">
+    Discover expansion opportunities through feature usage analysis, lookalike modeling, and whitespace mapping.
   </Card>
-    <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
+  <Card title="Automate Key Workflows">
+    Prepare business reviews, review portfolio health, and deep-dive into accounts in minutes instead of hours.
   </Card>
-  <Card
-    title="API documentation"
-    icon="terminal"
-    href="/api-reference/introduction"
-  >
-    Auto-generate API documentation from OpenAPI specifications.
-  </Card>
-</Columns>
+</CardGroup>
 
-## Create beautiful pages
+### How it works
 
-Everything you need to create world-class documentation.
+1. **Connect your sources** — Sign in to your SaaS tools, databases, or other systems. If the data exists, Humm can analyze it.
 
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
-  </Card>
-  <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
-  >
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
+2. **Humm learns your business** — Humm automatically builds a knowledge graph of your business processes and data relationships. Ready to use in minutes.
 
-## Need inspiration?
+3. **Ask questions, get answers** — Ask questions in plain English. Humm generates reports with charts, data tables, and recommendations.
 
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
+---
+
+## Core Concepts
+
+Understanding these five concepts will help you get the most out of Humm.
+
+### Threads
+
+Threads are conversations with Humm. Each thread captures a back-and-forth dialogue where you ask questions and Humm provides answers.
+
+When you ask a question, Humm shows you:
+- **What it's doing** — A reasoning section that shows the steps Humm takes to find your answer
+- **The answer** — A formatted response that may include text, charts, tables, and recommendations
+
+You can ask follow-up questions in the same thread to dig deeper. Threads are saved automatically, so you can return to past analyses anytime.
+
+### Commands
+
+Commands are reusable prompts that save you time on repetitive work. Instead of typing out the same detailed question each time, you create a Command once and run it whenever you need it.
+
+**Common uses for Commands:**
+- QBR preparation for a specific account
+- Weekly portfolio health reviews
+- New customer onboarding checklists
+- Churn risk assessments
+
+Commands turn hours of meeting prep into minutes. You can create Commands for yourself or share them with your team.
+
+### Memories
+
+Memories are how Humm learns and gets smarter over time. As you use Humm, it automatically extracts important knowledge from your conversations—things like business definitions, data relationships, and organizational context.
+
+**Examples of Memories:**
+- "The csm_owner field determines account ownership"
+- "CSAT and resolution time determine support quality"
+- "Link HubSpot to Pendo via the account_id property"
+
+Memories are reviewed before being applied, so you stay in control of what Humm learns. Over time, this tribal knowledge makes Humm's answers more accurate and relevant to your specific business.
+
+### Integrations
+
+Integrations connect Humm to your data sources. The more integrations you set up, the more complete picture Humm has of your customers.
+
+**Types of integrations:**
+- **Databases** — Snowflake, BigQuery, PostgreSQL, and others for your core business data
+- **CRM systems** — Salesforce, HubSpot, Attio for customer and deal information
+- **Product analytics** — Mixpanel, Pendo, PostHog for usage data
+- **Support tools** — Intercom, ChurnZero for customer interactions
+- **Project management** — Jira, Linear for tracking and planning
+
+Setting up an integration takes just a few minutes. Once connected, Humm automatically discovers your data structure.
+
+### Ontology
+
+The ontology is Humm's understanding of your business. It maps out the key entities in your world (like Customers, Accounts, Products) and how they relate to each other.
+
+**What the ontology includes:**
+- **Business entities** — The core concepts in your business and their definitions
+- **Relationships** — How entities connect (e.g., Accounts have Users, Users generate Events)
+- **Key metrics** — Important KPIs like Monthly Recurring Revenue, churn rate, NPS
+- **Business glossary** — Definitions specific to your organization
+
+Humm generates the ontology automatically from your integrations, but you can refine it to match exactly how your team thinks about the business. A well-tuned ontology means more accurate answers.
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Getting Started" icon="rocket" href="/getting-started">
+    Set up your account and create your first thread.
+  </Card>
+  <Card title="Integrations" icon="plug" href="/integrations/overview">
+    Connect Humm to your data sources.
+  </Card>
+</CardGroup>

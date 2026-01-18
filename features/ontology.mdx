@@ -1,0 +1,118 @@
+---
+title: Ontology
+description: Humm's understanding of your business entities and relationships.
+---
+
+The ontology is Humm's map of your business. It defines the key entities in your world—like Customers, Accounts, and Products—and how they relate to each other. A well-defined ontology helps Humm understand your questions and return accurate answers.
+
+## What's in the Ontology?
+
+### Entities
+
+Entities are the core concepts in your business. Common examples:
+
+- **Account** — A company or organization you do business with
+- **Contact** — A person associated with an account
+- **Opportunity** — A potential deal or sale
+- **Subscription** — A recurring revenue relationship
+- **User** — Someone who uses your product
+- **Event** — An action or activity in your product
+
+Each entity has attributes (like name, created date, or status) that describe it.
+
+### Relationships
+
+Relationships define how entities connect:
+
+- Accounts **have** Contacts
+- Accounts **have** Subscriptions
+- Users **belong to** Accounts
+- Users **generate** Events
+- Opportunities **convert to** Subscriptions
+
+These relationships let Humm navigate your data and answer questions that span multiple systems.
+
+### Metrics
+
+Metrics are the key performance indicators you track:
+
+- **Monthly Recurring Revenue (MRR)** — Revenue from subscriptions
+- **Churn Rate** — Percentage of customers who cancel
+- **Net Promoter Score (NPS)** — Customer satisfaction measure
+- **Health Score** — Overall account health indicator
+
+Humm uses metric definitions to calculate values consistently across your analyses.
+
+## How Humm Builds the Ontology
+
+When you connect integrations, Humm automatically discovers your data structure:
+
+1. **Schema discovery** — Humm reads your tables, fields, and data types
+2. **Entity detection** — Humm identifies business entities from your data
+3. **Relationship inference** — Humm detects how entities connect based on keys and patterns
+4. **Metric recognition** — Humm identifies common metrics and calculations
+
+This automatic process gives you a working ontology immediately. You can then refine it to match exactly how your team thinks about the business.
+
+## Viewing the Ontology
+
+Click **Ontology** in the sidebar to explore Humm's understanding of your business. You'll see:
+
+- **Entity list** — All recognized entities and their attributes
+- **Relationship map** — Visual diagram of how entities connect
+- **Metric definitions** — How key metrics are calculated
+- **Data sources** — Which integrations power each entity
+
+## Refining the Ontology
+
+The automatic ontology is a starting point. Refine it to improve accuracy:
+
+### Renaming Entities
+
+If Humm calls something "Company" but your team says "Account," rename it. Humm will understand both terms, but using your team's language makes conversations more natural.
+
+### Adding Relationships
+
+If Humm missed a connection between entities, add it manually. For example, if your product data links to accounts through a custom field, define that relationship so Humm can traverse it.
+
+### Defining Metrics
+
+Add your specific metric calculations. If your health score formula is unique to your business, define it in the ontology so Humm calculates it correctly every time.
+
+### Adding Business Context
+
+Enrich entities with descriptions and examples:
+
+- "Churned accounts are those with status = 'cancelled' and no active subscription"
+- "Enterprise tier includes Pro, Business, and Enterprise plans"
+
+This context helps Humm interpret your questions accurately.
+
+## Ontology and Accuracy
+
+The ontology directly affects answer quality:
+
+| Ontology Quality | Result |
+|-----------------|--------|
+| **Minimal** | Humm can answer basic questions but may miss nuances |
+| **Good** | Humm understands your terminology and key relationships |
+| **Excellent** | Humm reasons about your business like a team member |
+
+Investing time in your ontology pays off in every conversation.
+
+## Tips for a Better Ontology
+
+<AccordionGroup>
+  <Accordion title="Use your team's language">
+    Name entities and metrics the way your team talks about them. If everyone says "ARR" not "Annual Recurring Revenue," use "ARR."
+  </Accordion>
+  <Accordion title="Define edge cases">
+    Clarify ambiguous situations: "An active account is one with at least one paying subscription, excluding trials."
+  </Accordion>
+  <Accordion title="Connect all your data">
+    The ontology works best when all your integrations are linked. Make sure Humm knows how to join data across systems.
+  </Accordion>
+  <Accordion title="Revisit periodically">
+    As your business evolves, so should your ontology. Review it quarterly to add new entities, metrics, or relationships.
+  </Accordion>
+</AccordionGroup>

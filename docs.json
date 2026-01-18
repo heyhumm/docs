@@ -1,87 +1,96 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Mint Starter Kit",
+  "theme": "maple",
+  "name": "Humm",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#E07A5F",
+    "light": "#F2A285",
+    "dark": "#C96A4F"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Documentation",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Start Here",
             "pages": [
               "index",
-              "quickstart",
-              "development"
+              "getting-started"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Key Features",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "features/threads",
+              "features/commands",
+              "features/memories",
+              "features/ontology"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Integrations",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "integrations/overview",
+              {
+                "group": "Data Warehouses",
+                "pages": [
+                  "integrations/snowflake",
+                  "integrations/bigquery",
+                  "integrations/databricks",
+                  "integrations/postgresql",
+                  "integrations/mysql"
+                ]
+              },
+              {
+                "group": "CRM & Sales",
+                "pages": [
+                  "integrations/salesforce",
+                  "integrations/hubspot",
+                  "integrations/attio",
+                  "integrations/gong"
+                ]
+              },
+              {
+                "group": "Customer Success",
+                "pages": [
+                  "integrations/churnzero",
+                  "integrations/intercom"
+                ]
+              },
+              {
+                "group": "Product Analytics",
+                "pages": [
+                  "integrations/pendo",
+                  "integrations/mixpanel",
+                  "integrations/posthog"
+                ]
+              },
+              {
+                "group": "Project Management",
+                "pages": [
+                  "integrations/jira",
+                  "integrations/linear"
+                ]
+              },
+              {
+                "group": "Custom",
+                "pages": [
+                  "integrations/custom-rest-api"
+                ]
+              }
             ]
           },
           {
-            "group": "AI tools",
+            "group": "Guides",
             "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "guides/creating-snowflake-private-keys"
             ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",
@@ -90,33 +99,41 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "Contact",
+        "href": "mailto:hey@heyhumm.ai"
+      },
+      {
+        "label": "Login",
+        "href": "https://app.heyhumm.ai"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Get Started",
+      "href": "https://heyhumm.ai/pricing"
     }
-  },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
   },
   "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+    "socials": {}
+  },
+  "typography": {
+    "headings": {
+      "fontFamily": "var(--font-geist-sans)"
     }
+  },
+  "rounded": "default",
+  "topbarLinks": [
+    {
+      "name": "Contact",
+      "url": "mailto:hey@heyhumm.ai"
+    },
+    {
+      "name": "Login",
+      "url": "https://app.heyhumm.ai"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Get Started",
+    "url": "https://heyhumm.ai/pricing"
   }
 }

@@ -1,0 +1,137 @@
+---
+title: Integrations
+description: Connect your data sources so Humm can answer questions about your customers.
+---
+
+Integrations connect Humm to the tools and data you already use. Once connected, Humm can pull information from these sources to answer your questions—no manual data exports or spreadsheets required.
+
+<Tip>
+The more integrations you connect, the more complete picture Humm has of your customers. Start with one or two key sources, then add more over time.
+</Tip>
+
+---
+
+## How to Add an Integration
+
+1. Click **Integrations** in the sidebar
+2. Click **Browse Catalog**
+3. Select the integration you want to connect
+4. Enter your credentials and click **Save**
+5. Click **Introspect Schema** to let Humm learn the data structure
+
+Most integrations take just a few minutes to set up. Once connected, Humm automatically discovers your tables, fields, and relationships.
+
+---
+
+## Available Integrations
+
+### Data Warehouses
+
+Your data warehouse is often the richest source of customer information. Connect it to give Humm access to your core business data.
+
+<CardGroup cols={2}>
+  <Card title="Snowflake" icon="snowflake" href="/integrations/snowflake">
+    Cloud data warehouse with support for private key authentication.
+  </Card>
+  <Card title="BigQuery" icon="google" href="/integrations/bigquery">
+    Google's data warehouse with service account authentication.
+  </Card>
+  <Card title="Databricks" icon="database" href="/integrations/databricks">
+    Unified analytics platform with SQL warehouse support.
+  </Card>
+  <Card title="PostgreSQL" icon="database" href="/integrations/postgresql">
+    Connect directly to PostgreSQL databases.
+  </Card>
+  <Card title="MySQL" icon="database" href="/integrations/mysql">
+    Connect directly to MySQL databases.
+  </Card>
+</CardGroup>
+
+### CRM & Sales
+
+Your CRM contains essential context about accounts, contacts, deals, and customer relationships.
+
+<CardGroup cols={2}>
+  <Card title="Salesforce" icon="salesforce" href="/integrations/salesforce">
+    Leads, opportunities, accounts, and custom objects.
+  </Card>
+  <Card title="HubSpot" icon="hubspot" href="/integrations/hubspot">
+    Contacts, deals, companies, and marketing data.
+  </Card>
+  <Card title="Attio" icon="address-book" href="/integrations/attio">
+    Modern CRM with flexible data models.
+  </Card>
+  <Card title="Gong" icon="phone" href="/integrations/gong">
+    Call recordings, transcripts, and conversation intelligence.
+  </Card>
+</CardGroup>
+
+### Customer Success & Support
+
+These tools help Humm understand customer health, engagement, and support history.
+
+<CardGroup cols={2}>
+  <Card title="ChurnZero" icon="heart-pulse" href="/integrations/churnzero">
+    Health scores, churn predictions, and engagement tracking.
+  </Card>
+  <Card title="Intercom" icon="comments" href="/integrations/intercom">
+    Customer conversations and support interactions.
+  </Card>
+</CardGroup>
+
+### Product Analytics
+
+Understand how customers actually use your product with usage data and behavioral analytics.
+
+<CardGroup cols={2}>
+  <Card title="Pendo" icon="chart-line" href="/integrations/pendo">
+    Feature adoption, page views, and in-app guides.
+  </Card>
+  <Card title="Mixpanel" icon="chart-bar" href="/integrations/mixpanel">
+    Event tracking, funnels, and user behavior.
+  </Card>
+  <Card title="PostHog" icon="flask" href="/integrations/posthog">
+    Product analytics with HogQL query support.
+  </Card>
+</CardGroup>
+
+### Project Management
+
+Connect your project tools to track customer-related work and feature requests.
+
+<CardGroup cols={2}>
+  <Card title="Jira" icon="jira" href="/integrations/jira">
+    Issues, projects, and sprint data from Atlassian.
+  </Card>
+  <Card title="Linear" icon="list-check" href="/integrations/linear">
+    Issues, projects, and team workflows.
+  </Card>
+</CardGroup>
+
+### Custom Integrations
+
+Don't see your tool listed? You can connect to almost any system with a REST API.
+
+<CardGroup cols={1}>
+  <Card title="Custom REST API" icon="code" href="/integrations/custom-rest-api">
+    Connect to any REST API with flexible authentication options.
+  </Card>
+</CardGroup>
+
+---
+
+## What Data Does Humm Access?
+
+When you connect an integration, Humm gets **read-only** access to your data. Humm can:
+
+- Query and retrieve data to answer your questions
+- Discover your schema (tables, fields, relationships)
+- Pull sample data to understand your data structure
+
+Humm **cannot** modify, delete, or write data to your connected systems.
+
+---
+
+## Need Help?
+
+If you're having trouble connecting an integration or need a new integration added, reach out to your Humm account team at [hey@heyhumm.ai](mailto:hey@heyhumm.ai).

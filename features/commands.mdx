@@ -1,0 +1,98 @@
+---
+title: Commands
+description: Save and reuse prompts to automate repetitive analyses.
+---
+
+Commands are reusable prompts that save you time on repetitive work. Instead of typing out the same detailed question each time, create a Command once and run it whenever you need it.
+
+## Why Use Commands?
+
+Many analyses follow the same pattern:
+- Preparing for a QBR with a specific account
+- Running weekly portfolio health checks
+- Assessing churn risk for renewal accounts
+- Generating onboarding status reports
+
+Without Commands, you'd type out (or copy-paste) the same detailed prompt every time. With Commands, you save the prompt once and run it with a single click.
+
+## Creating a Command
+
+1. Click **Commands** in the sidebar
+2. Click **New Command**
+3. Give your Command a name (e.g., "QBR Prep")
+4. Write the prompt you want to reuse
+5. Add any variables for dynamic content (optional)
+6. Click **Save**
+
+### Using Variables
+
+Variables let you customize a Command each time you run it. Wrap variable names in double curly braces:
+
+```
+Prepare a QBR summary for {{account_name}} including:
+- Health score trends over the last 6 months
+- Product usage highlights
+- Open support tickets
+- Expansion opportunities
+```
+
+When you run this Command, Humm will ask you to fill in `account_name` before executing.
+
+## Running a Command
+
+1. Click **Commands** in the sidebar
+2. Find the Command you want to run
+3. Click **Run**
+4. Fill in any variables if prompted
+5. Humm creates a new thread with the Command's prompt
+
+The result is a regular thread, so you can ask follow-up questions and dig deeper.
+
+## Command Ideas
+
+<CardGroup cols={2}>
+  <Card title="QBR Preparation">
+    Generate a comprehensive account review with health metrics, usage trends, and talking points.
+  </Card>
+  <Card title="Weekly Portfolio Review">
+    Summarize health changes, at-risk accounts, and expansion opportunities across your book of business.
+  </Card>
+  <Card title="Churn Risk Assessment">
+    Analyze warning signs for accounts approaching renewal, with recommended actions.
+  </Card>
+  <Card title="New Customer Onboarding">
+    Track onboarding progress, milestone completion, and early adoption metrics.
+  </Card>
+</CardGroup>
+
+## Sharing Commands
+
+Commands can be personal or shared with your team:
+
+- **Personal Commands** — Only you can see and run them
+- **Team Commands** — Anyone on your team can use them
+
+To share a Command, open it and click **Share with Team**. Shared Commands appear in everyone's Command library.
+
+## Editing and Deleting Commands
+
+Open any Command to edit its name, prompt, or variables. Changes apply immediately—the next time anyone runs the Command, they'll get the updated version.
+
+To delete a Command, open it and click **Delete**. Deleted Commands can't be recovered, so make sure you don't need it anymore.
+
+## Tips for Effective Commands
+
+<AccordionGroup>
+  <Accordion title="Be detailed in your prompts">
+    Commands work best when the prompt is specific. Include exactly what sections, metrics, and format you want in the output.
+  </Accordion>
+  <Accordion title="Use clear variable names">
+    Name variables descriptively: `{{account_name}}` is clearer than `{{x}}`. This helps when running the Command later.
+  </Accordion>
+  <Accordion title="Test before sharing">
+    Run your Command a few times with different inputs to make sure it produces good results before sharing with your team.
+  </Accordion>
+  <Accordion title="Start from a successful thread">
+    If you asked a great question in a thread and want to reuse it, copy the prompt into a new Command. You already know it works.
+  </Accordion>
+</AccordionGroup>

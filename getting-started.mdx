@@ -1,0 +1,122 @@
+---
+title: Getting Started
+description: Get up and running with Humm in minutes—no technical skills required.
+---
+
+## Before You Begin
+
+To get started with Humm, you'll need:
+
+- An invitation to your organization's Humm workspace (check your email)
+- Login credentials (usually your company SSO)
+- A data source to connect (your admin may have already set this up)
+
+<Note>
+If you're not sure whether your organization has Humm set up, reach out to your manager or IT team.
+</Note>
+
+---
+
+## Step 1: Log In to Humm
+
+1. Go to [app.heyhumm.ai](https://app.heyhumm.ai/)
+2. Click **Log In** and sign in with your company credentials (SSO)
+3. You should see your organization name in the bottom left corner
+
+If you're joining an existing team, you'll likely see integrations and threads that others have already created. Feel free to explore!
+
+---
+
+## Step 2: Connect Your Data
+
+Before Humm can answer questions, it needs access to your data. If your admin hasn't already set up integrations, here's how to add one:
+
+<Frame>
+  <iframe
+    src="https://www.loom.com/embed/d08053fa7e9c4297b77bf7c9e9a32c4f"
+    width="100%"
+    height="400"
+    frameBorder="0"
+    allowFullScreen
+  />
+</Frame>
+
+1. Click **Integrations** in the sidebar
+2. Click **Browse Catalog** to see available data sources
+3. Select the integration you want (e.g., Snowflake, HubSpot, Salesforce)
+4. Fill out the connection details and click **Save**
+5. Click the **Introspect Schema** button to let Humm learn your data structure
+
+<Tip>
+Start with your most important data source—usually your data warehouse (Snowflake, BigQuery) or CRM (Salesforce, HubSpot). You can always add more integrations later.
+</Tip>
+
+After a few minutes, Humm will understand your data and be ready to answer questions.
+
+---
+
+## Step 3: Ask Your First Question
+
+Now for the fun part—asking Humm a question.
+
+<Frame>
+  <iframe
+    src="https://www.loom.com/embed/05013e5b71654d16b9f34aa2f7d65d7c"
+    width="100%"
+    height="400"
+    frameBorder="0"
+    allowFullScreen
+  />
+</Frame>
+
+1. Click the **+ New** button in the top left to start a new thread
+2. Type a question in plain English
+3. Press **Send** and watch Humm work
+
+### Questions to try
+
+Not sure what to ask? Here are some ideas to get you started:
+
+<AccordionGroup>
+  <Accordion title="Account Health">
+    - "Which of my accounts are at risk of churning?"
+    - "Show me accounts with declining product usage this month"
+    - "What's the health status of [Account Name]?"
+  </Accordion>
+  <Accordion title="Meeting Prep">
+    - "Prepare a QBR summary for [Account Name]"
+    - "What should I know before my call with [Account Name]?"
+    - "Show me recent support tickets for [Account Name]"
+  </Accordion>
+  <Accordion title="Portfolio Overview">
+    - "How is my book of business performing this quarter?"
+    - "Which accounts have upcoming renewals?"
+    - "Show me my largest accounts by ARR"
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Step 4: Dig Deeper with Follow-ups
+
+Humm remembers the context of your conversation. After getting an initial answer, ask follow-up questions to explore further:
+
+- "Why is their usage declining?"
+- "Show me this as a chart"
+- "What actions should I take?"
+- "Compare this to last quarter"
+
+Each thread saves your full conversation, so you can come back to it anytime.
+
+---
+
+## What's Next?
+
+<CardGroup cols={2}>
+  <Card title="Explore Integrations" icon="plug" href="/integrations/overview">
+    Connect more data sources to give Humm a complete picture of your customers.
+  </Card>
+  <Card title="Learn Core Concepts" icon="book" href="/#core-concepts">
+    Understand threads, commands, memories, and more.
+  </Card>
+</CardGroup>
