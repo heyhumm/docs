@@ -1,4 +1,8 @@
-<svg width="409" height="389" viewBox="0 0 409 389" fill="none" xmlns="http://www.w3.org/2000/svg">
-<ellipse cx="208.276" cy="194.5" rx="189.72" ry="194.5" fill="#FE4B4B"/>
-<path d="M284.994 54.4953C326.489 63.2962 393.616 63.2407 393.616 63.2407C396.946 63.2407 399.59 73.1189 393.616 73.4018C51.4243 89.6075 543.253 214.361 5.4259 372.02C1.13923 373.277 -1.16816 364.15 3.09281 361.728C302.775 191.403 39.0692 2.33674 284.994 54.4953Z" fill="#FFFBF5"/>
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Icon (scaled down and repositioned) -->
+  <ellipse cx="30" cy="30" rx="27" ry="27" fill="#FE4B4B"/>
+  <path d="M40.5 7.8C46.4 9 55.9 9 55.9 9C56.5 9 57 10.4 55.9 10.5C7.3 12.8 77.2 30.5 0.8 53.1C0.2 53.3 -0.2 52 0.4 51.7C43.1 27.3 5.5 0.3 40.5 7.8Z" fill="#FFFBF5"/>
+
+  <!-- Text "Humm" -->
+  <text x="70" y="42" font-family="system-ui, -apple-system, sans-serif" font-size="38" font-weight="600" fill="#1a1a1a">Humm</text>
 </svg>

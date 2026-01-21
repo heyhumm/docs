@@ -1,0 +1,52 @@
+---
+title: Authentication
+description: Learn how to authenticate API requests using personal access tokens
+---
+
+## Overview
+
+All Humm API requests require authentication using a personal access token (PAT). These tokens allow you to securely access the Config, Analyst, and Billing APIs.
+
+## Creating a Personal Access Token
+
+1. Log in to your Humm account at [app.heyhumm.ai](https://app.heyhumm.ai)
+2. Navigate to **Settings** > **API Tokens**
+3. Click **Create New Token**
+4. Give your token a descriptive name
+5. Copy the token immediately - you won't be able to see it again
+
+<Warning>
+Store your personal access token securely. Anyone with access to your token can make API requests on your behalf.
+</Warning>
+
+## Using Your Token
+
+Include your personal access token in the `Authorization` header of every API request:
+
+```bash
+curl https://config.heyhumm.ai/api/v1/endpoint \
+  -H "Authorization: Bearer YOUR_TOKEN_HERE"
+```
+
+### Example Request
+
+```bash
+curl https://analyst.heyhumm.ai/api/v1/queries \
+  -H "Authorization: Bearer pat_1234567890abcdef" \
+  -H "Content-Type: application/json"
+```
+
+## Token Security Best Practices
+
+- **Never commit tokens to version control** - Use environment variables instead
+- **Rotate tokens regularly** - Create new tokens and delete old ones periodically
+- **Use separate tokens per application** - This makes it easier to revoke access if needed
+- **Delete unused tokens** - Remove tokens that are no longer in use
+
+## Rate Limiting
+
+API requests are rate limited to ensure service stability. If you exceed the rate limit, you'll receive a `429 Too Many Requests` response. Check the response headers for rate limit information:
+
+- `X-RateLimit-Limit` - Maximum requests allowed per time window
+- `X-RateLimit-Remaining` - Requests remaining in current window
+- `X-RateLimit-Reset` - Time when the rate limit resets (Unix timestamp)
