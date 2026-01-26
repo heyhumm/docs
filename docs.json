@@ -85,7 +85,8 @@
           {
             "group": "Guides",
             "pages": [
-              "guides/creating-snowflake-private-keys"
+              "guides/creating-snowflake-private-keys",
+              "guides/creating-bigquery-service-account-credentials"
             ]
           }
         ]
