@@ -1,17 +1,194 @@
 ---
 title: HubSpot
-description: Connect to HubSpot CRM.
+description: Connect to HubSpot CRM for contacts, companies, deals, and custom objects.
 ---
 
-HubSpot is a customer platform with software, integrations, and resources to connect marketing, sales, and customer service.
+HubSpot is a customer platform with software, integrations, and resources to connect marketing, sales, and customer service. Connect Humm to search records, discover object schemas, and understand your CRM data.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `HUBSPOT_LIST_OBJECTS` | List objects with pagination and property filtering |
-| `HUBSPOT_READ_RECORD` | Read a specific record by ID |
-| `HUBSPOT_SEARCH_OBJECTS` | Search records with filters, sorting, and pagination |
+| `HUBSPOT_READ_OWNERS` | List owners (users) to find IDs for record associations |
+| `HUBSPOT_SEARCH_COMPANIES` | Search companies with advanced filtering and sorting |
+| `HUBSPOT_SEARCH_DEALS` | Search deals with advanced filtering and sorting |
+| `HUBSPOT_SEARCH_CONTACTS` | Search contacts with advanced filtering and sorting |
+| `HUBSPOT_LIST_OBJECTS` | List records for any object type with pagination |
+| `HUBSPOT_BATCH_READ_RECORDS` | Batch read multiple records by ID in a single request |
+| `HUBSPOT_READ_RECORD` | Get a single record by ID with optional associations |
+| `HUBSPOT_SEARCH_OBJECTS` | Generic search for any object type with filters |
+| `HUBSPOT_QUERY_ASSOCIATIONS` | Batch query associations between object types |
+| `HUBSPOT_LIST_PROPERTIES` | List available properties for an object type |
+| `HUBSPOT_LIST_SCHEMAS` | List custom object schemas to discover objectTypeIds |
+
+## Filter Groups Syntax
+
+Humm uses HubSpot's filterGroups structure for advanced searches. Here's how it works:
+
+### Logic
+
+- **Within a filter group**: Conditions are combined with AND
+- **Across filter groups**: Groups are combined with OR
+
+### Structure
+
+```json
+{
+  "filterGroups": [
+    {
+      "filters": [
+        {"propertyName": "email", "operator": "CONTAINS_TOKEN", "value": "@acme.com"},
+        {"propertyName": "lifecyclestage", "operator": "CONTAINS_TOKEN", "value": "customer"}
+      ]
+    }
+  ]
+}
+```
+
+### Operators
+
+| Operator | Description | Value Type |
+|----------|-------------|------------|
+| `EQ` | Equal to (use for strings/numbers, not enumeration properties) | `value` |
+| `NEQ` | Not equal to | `value` |
+| `LT` / `LTE` | Less than / Less than or equal | `value` |
+| `GT` / `GTE` | Greater than / Greater than or equal | `value` |
+| `BETWEEN` | Within range (inclusive) | `value` + `highValue` |
+| `IN` / `NOT_IN` | In list / Not in list | `values` array |
+| `HAS_PROPERTY` | Property has a value | none |
+| `NOT_HAS_PROPERTY` | Property has no value | none |
+| `CONTAINS_TOKEN` | Contains token (preferred for enumeration properties) | `value` |
+| `NOT_CONTAINS_TOKEN` | Does not contain token | `value` |
+
+### Enumeration Properties
+
+Certain HubSpot properties are "enumeration" types internally and require special handling:
+
+- `hubspot_owner_id`
+- `dealstage`
+- `pipeline`
+- `lifecyclestage`
+
+For these properties, **use `CONTAINS_TOKEN` instead of `EQ`**. Using `EQ` often returns no results.
+
+```json
+// Correct - use CONTAINS_TOKEN for enumeration properties
+{"propertyName": "hubspot_owner_id", "operator": "CONTAINS_TOKEN", "value": "12345"}
+{"propertyName": "dealstage", "operator": "CONTAINS_TOKEN", "value": "closedwon"}
+
+// Wrong - EQ often fails for enumeration properties
+{"propertyName": "hubspot_owner_id", "operator": "EQ", "value": "12345"}
+```
+
+## Query Examples
+
+### Search companies by owner
+
+```json
+{
+  "filterGroups": [
+    {
+      "filters": [
+        {"propertyName": "hubspot_owner_id", "operator": "CONTAINS_TOKEN", "value": "12345678"}
+      ]
+    }
+  ],
+  "properties": ["name", "domain", "hubspot_owner_id"],
+  "limit": 50
+}
+```
+
+### Search deals in a specific stage
+
+```json
+{
+  "filterGroups": [
+    {
+      "filters": [
+        {"propertyName": "dealstage", "operator": "CONTAINS_TOKEN", "value": "closedwon"}
+      ]
+    }
+  ],
+  "sorts": [{"propertyName": "closedate", "direction": "DESCENDING"}],
+  "properties": ["dealname", "amount", "closedate"],
+  "limit": 100
+}
+```
+
+### Search contacts by email domain
+
+```json
+{
+  "filterGroups": [
+    {
+      "filters": [
+        {"propertyName": "email", "operator": "CONTAINS_TOKEN", "value": "@acme.com"}
+      ]
+    }
+  ],
+  "properties": ["firstname", "lastname", "email"],
+  "limit": 50
+}
+```
+
+### Combined filters (AND logic within group)
+
+```json
+{
+  "filterGroups": [
+    {
+      "filters": [
+        {"propertyName": "pipeline", "operator": "CONTAINS_TOKEN", "value": "default"},
+        {"propertyName": "amount", "operator": "GTE", "value": "50000"}
+      ]
+    }
+  ]
+}
+```
+
+### Multiple filter groups (OR logic across groups)
+
+```json
+{
+  "filterGroups": [
+    {
+      "filters": [
+        {"propertyName": "lifecyclestage", "operator": "CONTAINS_TOKEN", "value": "customer"}
+      ]
+    },
+    {
+      "filters": [
+        {"propertyName": "email", "operator": "CONTAINS_TOKEN", "value": "@partner.com"}
+      ]
+    }
+  ]
+}
+```
+
+## Custom Objects
+
+HubSpot supports custom objects with unique schemas. To work with custom objects:
+
+1. **Discover schemas**: Use `HUBSPOT_LIST_SCHEMAS` to list all custom object schemas and their `objectTypeId` values (e.g., `2-123456`)
+2. **List properties**: Use `HUBSPOT_LIST_PROPERTIES` with the `objectTypeId` to see available fields
+3. **Query records**: Use `HUBSPOT_LIST_OBJECTS` or `HUBSPOT_SEARCH_OBJECTS` with the `objectTypeId` as the `object_type`
+
+```json
+// List custom object records
+{"object_type": "2-123456", "limit": 50, "properties": ["name", "custom_code"]}
+
+// Search custom objects
+{
+  "object_type": "2-123456",
+  "filterGroups": [
+    {
+      "filters": [
+        {"propertyName": "custom_code", "operator": "CONTAINS_TOKEN", "value": "ABC-"}
+      ]
+    }
+  ]
+}
+```
 
 ## Authentication
 

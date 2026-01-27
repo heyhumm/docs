@@ -3,15 +3,149 @@ title: Intercom
 description: Connect to Intercom customer messaging platform.
 ---
 
-Intercom is a customer service solution that uses AI, bots, and human support to help businesses deliver personalized customer experiences.
+Intercom is a customer service solution that uses AI, bots, and human support to help businesses deliver personalized customer experiences. Connect Humm to search conversations, list companies, and understand your customer support data.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `INTERCOM_SEARCH_CONVERSATIONS` | Search conversations with filters |
-| `INTERCOM_LIST_CONTACTS` | List contacts with pagination |
-| `INTERCOM_GET_CONTACT` | Get details for a specific contact |
+| `INTERCOM_LIST_ALL_COMPANIES` | List companies with automatic scroll pagination |
+| `INTERCOM_SEARCH_CONTACTS` | Search contacts using structured query objects |
+| `INTERCOM_SEARCH_CONVERSATIONS` | Search conversations using structured query objects |
+| `INTERCOM_GET_ACCOUNT_CONVERSATIONS` | Get all conversations for contacts matching an account external ID pattern |
+
+## Query Structure
+
+Intercom search tools (`INTERCOM_SEARCH_CONTACTS`, `INTERCOM_SEARCH_CONVERSATIONS`) use a structured query syntax for filtering. Here's how to build queries:
+
+### Basic Filter
+
+```json
+{
+  "field": "field_name",
+  "operator": "=",
+  "value": "value"
+}
+```
+
+### Available Operators
+
+| Operator | Description |
+|----------|-------------|
+| `=` | Equals |
+| `!=` | Not equals |
+| `>` | Greater than or equal |
+| `<` | Less than or equal |
+| `IN` | Value is in array (max 15 values) |
+| `NIN` | Value is not in array (max 15 values) |
+| `~` | Contains |
+| `!~` | Does not contain |
+| `^` | Starts with |
+| `$` | Ends with |
+
+### Combining Filters
+
+Use `AND` or `OR` logical operators to combine multiple filters:
+
+```json
+{
+  "operator": "AND",
+  "value": [
+    {
+      "field": "state",
+      "operator": "=",
+      "value": "open"
+    },
+    {
+      "field": "team_assignee_id",
+      "operator": "=",
+      "value": "123456"
+    }
+  ]
+}
+```
+
+### Query Examples
+
+```
+# Open conversations
+{"field": "state", "operator": "=", "value": "open"}
+
+# Conversations in multiple states
+{"field": "state", "operator": "IN", "value": ["open", "snoozed"]}
+
+# Contacts by email domain
+{"field": "email_domain", "operator": "=", "value": "acme.com"}
+
+# Conversations created after a date
+{"field": "created_at", "operator": ">", "value": "2024-01-01"}
+
+# Date range filter
+{
+  "operator": "AND",
+  "value": [
+    {"field": "created_at", "operator": ">", "value": "2024-01-01"},
+    {"field": "created_at", "operator": "<", "value": "2024-02-01"}
+  ]
+}
+```
+
+### Query Constraints
+
+- Maximum 2 levels of nesting
+- Maximum 15 filters per AND/OR group
+- Arrays (IN/NIN) limited to 15 values
+- Empty strings are not allowed as values
+- Timestamp filtering only supports `>` and `<` operators
+
+## Searchable Fields
+
+### Contacts
+
+| Field | Type |
+|-------|------|
+| `id` | String |
+| `name` | String |
+| `email` | String |
+| `email_domain` | String |
+| `external_id` | String |
+| `owner_id` | Integer |
+| `created_at` | Timestamp |
+
+### Conversations
+
+| Field | Type |
+|-------|------|
+| `id` | String |
+| `state` | String (`open`, `closed`, `snoozed`) |
+| `priority` | String |
+| `source.type` | String |
+| `source.subject` | String |
+| `contact_ids` | Array of strings |
+| `teammate_ids` | Array of strings |
+| `admin_assignee_id` | String |
+| `team_assignee_id` | String |
+| `created_at` | Timestamp |
+| `updated_at` | Timestamp |
+
+## Account Conversations Tool
+
+The `INTERCOM_GET_ACCOUNT_CONVERSATIONS` tool simplifies finding conversations for an entire account:
+
+1. Searches for contacts whose `external_id` matches a pattern
+2. Automatically batches contact IDs (Intercom limits to 15 per query)
+3. Fetches conversations across all matching contacts
+4. Returns combined results
+
+```json
+{
+  "external_id_pattern": "ACME_",
+  "created_after": "2024-01-01",
+  "limit": 500
+}
+```
+
+This matches contacts with external IDs like `ACME_001`, `ACME_002`, etc.
 
 ## Authentication
 

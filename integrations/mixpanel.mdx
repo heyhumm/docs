@@ -3,18 +3,68 @@ title: Mixpanel
 description: Connect to Mixpanel product analytics.
 ---
 
-Mixpanel is a product analytics platform that helps teams analyze how users engage with their products.
+Mixpanel is a product analytics platform that helps teams analyze how users engage with their products. Connect Humm to query events, explore funnels, analyze cohorts, and gain insights from your product data.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `MIXPANEL_QUERY_EVENTS` | Query event data with filters and aggregations |
-| `MIXPANEL_GET_FUNNELS` | Get funnel conversion data |
-| `MIXPANEL_GET_RETENTION` | Get user retention cohort data |
+| `MIXPANEL_JQL_QUERY` | Execute custom JQL (JavaScript Query Language) queries |
+| `MIXPANEL_QUERY_PROFILES` | Query user or group profile data |
+| `MIXPANEL_QUERY_SEGMENTATION` | Get event data segmented and filtered by properties |
+| `MIXPANEL_LIST_FUNNELS` | Get funnel names and IDs |
+| `MIXPANEL_QUERY_FUNNEL` | Retrieve funnel performance data |
+| `MIXPANEL_LIST_COHORTS` | Get all cohorts in a project |
+| `MIXPANEL_QUERY_RETENTION_REPORT` | Get cohort analysis and retention data |
+| `MIXPANEL_QUERY_INSIGHT` | Get data from insights reports |
+| `MIXPANEL_AGGREGATE_EVENT_COUNTS` | Retrieve event counts aggregated over time |
+| `MIXPANEL_TODAYS_TOP_EVENTS` | Get top events for today with counts |
+| `MIXPANEL_GET_ALL_PROJECTS` | List all projects for the authenticated account |
+
+## JQL Query Examples
+
+Humm can execute JQL (JavaScript Query Language) queries against Mixpanel's Query API. Here are common patterns:
+
+```javascript
+// Get events from the last 7 days
+function main() {
+  return Events({
+    from_date: '2024-01-01',
+    to_date: '2024-01-07'
+  });
+}
+
+// Filter events by name
+function main() {
+  return Events({
+    from_date: '2024-01-01',
+    to_date: '2024-01-07'
+  }).filter(function(event) {
+    return event.name == 'Purchase';
+  });
+}
+
+// Group by property
+function main() {
+  return Events({
+    from_date: '2024-01-01',
+    to_date: '2024-01-07'
+  }).groupBy(['properties.plan_type'], mixpanel.reducer.count());
+}
+```
+
+## Query Constraints
+
+JQL queries have the following limits:
+
+- 60 queries per hour rate limit
+- Maximum 5 concurrent queries
+- 2-minute execution timeout
+- 5 GB data processing limit
+- 2 GB output limit
 
 ## Authentication
 
-<Card title="API Secret" icon="key">
-  Service account authentication with API secret. Create a service account in Mixpanel Project Settings.
+<Card title="OAuth" icon="plug">
+  Connect securely via OAuth. Authorize Humm to access your Mixpanel workspace.
 </Card>

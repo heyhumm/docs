@@ -3,19 +3,68 @@ title: ChurnZero
 description: Connect to ChurnZero customer success platform.
 ---
 
-ChurnZero is a real-time customer success platform that helps subscription businesses fight customer churn.
+ChurnZero is a real-time customer success platform that helps subscription businesses fight customer churn. Connect Humm to query accounts, contacts, churn scores, and tasks using the ChurnZero OData API.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `CHURNZERO_LIST_ACCOUNTS` | List accounts with filtering and pagination |
-| `CHURNZERO_LIST_CONTACTS` | List contacts with filtering and pagination |
-| `CHURNZERO_LIST_EVENTS` | List customer events and activities |
-| `CHURNZERO_GET_CHURN_SCORES` | Get churn risk scores for accounts |
+| `CHURNZERO_GET_ACCOUNTS` | List accounts with health scores using OData queries |
+| `CHURNZERO_GET_ACCOUNT` | Get account details by internal ChurnZero ID |
+| `CHURNZERO_GET_ACCOUNT_BY_EXTERNAL_ID` | Get account by your system's external ID |
+| `CHURNZERO_GET_CONTACTS` | List contacts with filtering by account or email |
+| `CHURNZERO_GET_CHURN_SCORES` | List churn score definitions (names and metadata) |
+| `CHURNZERO_GET_CHURN_SCORE_FACTORS` | List factors contributing to churn scores |
+| `CHURNZERO_GET_CHURN_SCORE_CALCULATIONS` | Get historical churn score calculations for accounts |
+| `CHURNZERO_GET_CHURN_SCORE_FACTOR_CALCULATIONS` | Get detailed calculation logs for churn score factors |
+| `CHURNZERO_GET_TASKS` | List tasks and to-dos associated with accounts |
+| `CHURNZERO_GET_USER_ACCOUNT` | Get details for a ChurnZero user (CSM, Admin, etc.) |
+
+## OData Query Examples
+
+Humm uses OData v4 query parameters to filter and paginate results. Here are common patterns:
+
+```
+# Active accounts with high contract value
+$filter=IsActive eq true and TotalContractAmount gt 10000
+
+# Accounts created after a specific date
+$filter=ObjectCreatedDate gt 2024-01-01
+
+# Sort by newest first
+$orderby=ObjectCreatedDate desc
+
+# Select specific fields only
+$select=Id,Name,TotalContractAmount,IsActive
+
+# Contacts for a specific account
+$filter=AccountId eq 12345
+
+# Open tasks for an account
+$filter=AccountId eq 25322 and isClosed eq false
+```
+
+### OData Filter Limitations
+
+ChurnZero's OData implementation has specific constraints:
+
+- **No mixed operators**: Do not combine `and` and `or` in the same filter. Keep filters flat (all-`and` or all-`or`).
+- **No ID filtering on list endpoints**: Cannot filter by `Id` or `AccountExternalId` on `/Account`. Use `CHURNZERO_GET_ACCOUNT` or `CHURNZERO_GET_ACCOUNT_BY_EXTERNAL_ID` instead.
+- **Limited string functions**: `contains()`, `startswith()`, `endswith()` may not work on all endpoints. Fall back to exact `eq` matches if you get HTTP 400 errors.
+
+### Supported Operators
+
+| Operator | Example |
+|----------|---------|
+| `eq` | `Name eq 'Acme Corp'` |
+| `ne` | `Status ne 'Active'` |
+| `gt` | `TotalContractAmount gt 1000` |
+| `ge` | `ObjectCreatedDate ge 2024-01-01` |
+| `lt` | `TotalContractAmount lt 5000` |
+| `le` | `ObjectCreatedDate le 2024-12-31` |
 
 ## Authentication
 
-<Card title="API Key" icon="key">
-  API key authentication. Obtain your API key from ChurnZero Settings > Integrations.
+<Card title="Basic Auth" icon="lock">
+  Connect using your ChurnZero username and password. Obtain your API credentials from your ChurnZero administrator.
 </Card>

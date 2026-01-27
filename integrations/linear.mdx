@@ -1,17 +1,45 @@
 ---
 title: Linear
-description: Connect to Linear project management.
+description: Connect to Linear for issue tracking and project management.
 ---
 
-Linear is the issue tracking tool that streamlines software projects, sprints, tasks, and bug tracking.
+Linear is the issue tracking tool that streamlines software projects, sprints, tasks, and bug tracking. Connect Humm to explore issues, discover project structures, and understand your team's work.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `LINEAR_LIST_ISSUES` | List issues with filtering and pagination |
-| `LINEAR_GET_ISSUE` | Get details for a specific issue |
-| `LINEAR_LIST_PROJECTS` | List accessible projects |
+| `LINEAR_LIST_LINEAR_TEAMS` | List all teams in the Linear workspace |
+| `LINEAR_LIST_LINEAR_ISSUES` | List all issues in the Linear workspace |
+| `LINEAR_LIST_LINEAR_PROJECTS` | List all projects in the Linear workspace |
+| `LINEAR_GET_LINEAR_ISSUE` | Get the details of a specific issue |
+
+## Common Queries
+
+Humm can answer questions about your Linear workspace:
+
+```
+# Find issues
+"Show me all open bugs in the Platform team"
+"What issues are assigned to me?"
+"List high priority issues created this week"
+
+# Explore projects
+"What projects does the Engineering team have?"
+"Show me the roadmap project details"
+
+# Understand workload
+"How many issues are in progress across all teams?"
+"What's the backlog looking like for the Mobile team?"
+```
+
+## Team Access
+
+Linear organizes work by teams. When exploring your workspace, Humm can:
+
+- List all teams you have access to
+- Filter issues by team
+- Show project structures within teams
 
 ## Authentication
 

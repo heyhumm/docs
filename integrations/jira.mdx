@@ -1,17 +1,49 @@
 ---
 title: Jira
-description: Connect to Atlassian Jira.
+description: Connect to Atlassian Jira for issue tracking and project management.
 ---
 
-Jira is a project management tool that helps teams plan, track, and manage software development.
+Jira is a project management tool that helps teams plan, track, and manage software development. Connect Humm to search issues, discover project structures, and understand your team's work.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `JIRA_SEARCH_ISSUES` | Search issues using JQL queries |
-| `JIRA_GET_ISSUE` | Get details for a specific issue |
+| `JIRA_SEARCH_ISSUES_BY_JQL` | Search issues using JQL queries with pagination |
+| `JIRA_GET_ISSUE` | Get detailed information about a specific issue |
+| `JIRA_GET_ISSUE_COMMENTS` | Get comments on a specific issue |
 | `JIRA_LIST_PROJECTS` | List accessible projects |
+| `JIRA_LIST_FIELDS` | List all fields including custom fields |
+| `JIRA_GET_PROJECT_ISSUE_TYPES` | Get issue types available in a project |
+| `JIRA_FIND_USERS` | Search for users by name or email |
+
+## JQL Query Examples
+
+Humm uses JIRA Query Language (JQL) to search issues. Here are common patterns:
+
+```
+# Recent bugs in a project
+project = PROJ AND issuetype = Bug AND created >= -7d
+
+# Open high priority issues
+status = Open AND priority = High ORDER BY created DESC
+
+# My assigned tasks
+assignee = currentUser() AND status NOT IN (Done, Closed)
+
+# Unassigned issues
+assignee IS EMPTY AND status = Open
+```
+
+## Project Access Control
+
+When connecting Jira, you can restrict which projects Humm can access. This is useful for:
+
+- Limiting access to sensitive projects
+- Scoping queries to relevant teams
+- Ensuring data governance compliance
+
+All searches are automatically scoped to allowed projects. If no project filter is specified in a query, results are limited to configured projects.
 
 ## Authentication
 

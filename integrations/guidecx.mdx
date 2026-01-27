@@ -1,0 +1,117 @@
+---
+title: GuideCX
+description: Connect to GuideCX for project onboarding and customer implementation tracking.
+---
+
+GuideCX is a customer onboarding and project management platform designed for implementation teams. Connect Humm to search projects, milestones, tasks, and notes to understand customer implementation progress.
+
+## Tools
+
+| Tool | Description |
+|------|-------------|
+| `GUIDECX_SEARCH_PROJECTS` | Search projects with filtering by customer name, status, or custom properties |
+| `GUIDECX_SEARCH_MILESTONES` | Search milestones with optional project filtering |
+| `GUIDECX_SEARCH_TASKS` | Search tasks with filtering by project, name, or status |
+| `GUIDECX_SEARCH_NOTES` | Search notes by project or task |
+| `GUIDECX_LIST_USERS` | List all users in the workspace |
+
+## Filter Behavior
+
+### Case Sensitivity
+
+All GuideCX filters are **case-sensitive**. If no results are returned, verify the exact casing:
+
+```
+# These are all different searches:
+customerName = "Acme"
+customerName = "acme"
+customerName = "ACME"
+```
+
+**Tip:** Run a broad search first (no filters, limit=10) to see actual customer and project names, then refine with correct casing.
+
+### Partial Matching with `like:` Prefix
+
+Text filters (`customerName`, `name`) automatically use GuideCX's `like:` prefix for partial matching:
+
+```
+# Searching for customerName = "Acme" matches:
+- "Acme Corp"
+- "Acme Manufacturing, Inc."
+- "The Acme Company"
+
+# But NOT (wrong case):
+- "acme corp"
+- "ACME CORP"
+```
+
+## Custom Property Filtering
+
+Projects can have custom properties (e.g., HubSpot Company ID, Salesforce Account ID). Use `propsFilter` to filter by these values.
+
+### Discovering Custom Properties
+
+First, search projects without filters to inspect the `properties` object:
+
+```
+GUIDECX_SEARCH_PROJECTS(limit=10)
+
+# Response includes:
+{
+  "projects": [{
+    "name": "Acme Implementation",
+    "properties": {
+      "hubspotCompanyId": "12345",
+      "salesforceAccountId": "001ABC123",
+      "region": "EMEA"
+    }
+  }]
+}
+```
+
+### Filtering by Custom Properties
+
+Once you know the property name, use `propsFilter`:
+
+```
+GUIDECX_SEARCH_PROJECTS(
+  propsFilter = {
+    "name": "hubspotCompanyId",
+    "value": "12345"
+  }
+)
+```
+
+This maps to GuideCX's `props[hubspotCompanyId]=12345` query syntax.
+
+## Status Values
+
+### Project Statuses
+
+| Status | Description |
+|--------|-------------|
+| `ON_TIME` | Project is on schedule |
+| `LATE` | Project is behind schedule |
+| `ON_HOLD` | Project is paused |
+| `DONE` | Project is complete |
+| `NON_RESPONSIVE` | Customer is not responding |
+| `CANCELLED` | Project has been cancelled |
+
+### Task Statuses
+
+| Status | Description |
+|--------|-------------|
+| `NOT_STARTED` | Task has not begun |
+| `WORKING_ON_IT` | Task is in progress |
+| `DONE` | Task is complete |
+| `STUCK` | Task is blocked |
+| `SIGN_OFF` | Task awaiting sign-off |
+| `NOT_APPLICABLE` | Task does not apply |
+| `NOT_SCHEDULED` | Task has no scheduled date |
+| `SCHEDULED` | Task is scheduled |
+
+## Authentication
+
+<Card title="API Token" icon="key">
+  Connect using a GuideCX API Bearer Token. Obtain your token from the GuideCX workspace admin portal.
+</Card>

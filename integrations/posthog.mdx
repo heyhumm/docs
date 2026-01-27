@@ -3,13 +3,54 @@ title: PostHog
 description: Connect to PostHog product analytics.
 ---
 
-PostHog is the open-source product analytics platform that helps engineers build better products.
+PostHog is the open-source product analytics platform that helps engineers build better products. Connect Humm to query events, analyze user behavior, and explore your product data.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `POSTHOG_CREATE_QUERY` | Execute HogQL queries against your PostHog project |
+| `POSTHOG_CREATE_QUERY_IN_PROJECT_BY_ID` | Execute HogQL queries against your PostHog project |
+| `POSTHOG_LIST_USERS` | List users with project membership details |
+
+## HogQL Query Examples
+
+Humm uses HogQL, PostHog's SQL-like query language, to query your analytics data. Here are common patterns:
+
+```sql
+# Recent events
+SELECT * FROM events ORDER BY timestamp DESC LIMIT 100
+
+# Events by type in the last 7 days
+SELECT event, count() as count
+FROM events
+WHERE timestamp > now() - interval 7 day
+GROUP BY event
+ORDER BY count DESC
+
+# Unique users by event
+SELECT event, uniq(distinct_id) as unique_users
+FROM events
+GROUP BY event
+ORDER BY unique_users DESC
+
+# Page views with properties
+SELECT properties.$current_url as url, count() as views
+FROM events
+WHERE event = '$pageview'
+GROUP BY url
+ORDER BY views DESC
+LIMIT 20
+
+# User journey analysis
+SELECT distinct_id, event, timestamp
+FROM events
+WHERE distinct_id = 'user-id-here'
+ORDER BY timestamp ASC
+```
+
+## User Identification
+
+The `POSTHOG_LIST_USERS` tool helps identify users in your PostHog organization. Filter by email to find specific users and their project memberships.
 
 ## Authentication
 

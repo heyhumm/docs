@@ -3,13 +3,37 @@ title: Salesforce
 description: Connect to Salesforce CRM.
 ---
 
-Salesforce is the world's #1 CRM platform, enabling companies to manage customer relationships across sales, service, and marketing.
+Salesforce is the world's #1 CRM platform, enabling companies to manage customer relationships across sales, service, and marketing. Connect Humm to query accounts, contacts, opportunities, and any Salesforce object.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `SALESFORCE_EXECUTE_SOQL` | Run SOQL queries against your Salesforce org |
+| `SALESFORCE_QUERY_SOQL` | Execute SOQL queries against Salesforce objects |
+
+## SOQL Query Examples
+
+Humm uses Salesforce Object Query Language (SOQL) to retrieve data. Here are common patterns:
+
+```
+# Find a user by email
+SELECT Id, Name FROM User WHERE Email = 'user@example.com'
+
+# List accounts with health scores
+SELECT Id, Name, Health_Score__c FROM Account WHERE Health_Score__c != null
+
+# Open opportunities closing this quarter
+SELECT Id, Name, Amount, CloseDate FROM Opportunity
+WHERE StageName != 'Closed Won' AND StageName != 'Closed Lost'
+AND CloseDate = THIS_QUARTER
+
+# Contacts at a specific account
+SELECT Id, Name, Email, Phone FROM Contact WHERE AccountId = '001XXXXXXXXXXXX'
+
+# Recent leads
+SELECT Id, Name, Company, Status FROM Lead
+WHERE CreatedDate = LAST_N_DAYS:7 ORDER BY CreatedDate DESC
+```
 
 ## Authentication
 

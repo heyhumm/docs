@@ -1,16 +1,62 @@
 ---
 title: Attio
-description: Connect to Attio CRM.
+description: Connect to Attio CRM for contact management and deal tracking.
 ---
 
-Attio is the AI-native CRM that builds, scales, and grows your company with powerful and flexible data models.
+Attio is the AI-native CRM that builds, scales, and grows your company with powerful and flexible data models. Connect Humm to query people, companies, and deals with advanced filtering and sorting.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `ATTIO_LIST_RECORDS` | List records with optional filtering, sorting, and pagination |
-| `ATTIO_READ_RECORD` | Read a specific record by ID |
+| `ATTIO_LIST_RECORDS` | List records for an object type (people, companies, deals) with filtering and sorting |
+| `ATTIO_READ_RECORD` | Get a record by ID and object type |
+| `ATTIO_LIST_WORKSPACE_MEMBERS` | List all members of the Attio workspace |
+
+## Filter and Sort Examples
+
+Humm uses Attio's filter syntax to query records. Here are common patterns:
+
+```
+# List all people
+object: "people"
+
+# Filter by name
+object: "people"
+filter: {"name": "Ada Lovelace"}
+
+# Filter with OR conditions
+object: "people"
+filter: {
+  "$or": [
+    {"name": {"first_name": {"$eq": "David"}}},
+    {"name": {"first_name": {"$eq": "Steve"}}}
+  ]
+}
+
+# Sort by last name ascending
+object: "people"
+sorts: [{"direction": "asc", "attribute": "name", "field": "last_name"}]
+
+# Sort by creation date descending
+object: "companies"
+sorts: [{"direction": "desc", "attribute": "created_at"}]
+
+# Pagination
+object: "deals"
+limit: 100
+offset: 0
+```
+
+## Object Types
+
+Attio supports querying different object types:
+
+- **people** - Contact records with names, emails, and custom fields
+- **companies** - Organization records with company details
+- **deals** - Deal/opportunity records for pipeline tracking
+
+Use the object slug (e.g., `"people"`, `"companies"`, `"deals"`) or UUID to specify which object type to query.
 
 ## Authentication
 

@@ -7,9 +7,15 @@ Connect to any REST API that returns JSON data, enabling integration with intern
 
 ## Tools
 
-| Tool | Description |
-|------|-------------|
-| `REST_API_REQUEST` | Make HTTP requests to configured API endpoints |
+Tools for the Custom REST API connector are user-configured per deployment. Unlike other connectors with predefined tools, you define the API endpoints Humm can access based on your specific needs.
+
+Each tool you configure maps to an API endpoint and includes:
+- Tool name and description (used by the AI to understand when to use it)
+- HTTP method and endpoint path
+- Parameters (query, path, or body)
+- Response parsing configuration
+
+See [Configuring Custom Tools](#configuring-custom-tools) below for details.
 
 ## Authentication
 
@@ -23,4 +29,189 @@ Connect to any REST API that returns JSON data, enabling integration with intern
   <Card title="Basic Auth" icon="lock">
     Username and password authentication.
   </Card>
+  <Card title="Token Exchange" icon="arrows-rotate">
+    OAuth2-style token exchange for APIs requiring credential-based token refresh.
+  </Card>
 </CardGroup>
+
+### Token Exchange Authentication
+
+Token Exchange authentication supports APIs that require exchanging credentials for a short-lived access token. This is common in OAuth2-style APIs where you authenticate with a username/password or client credentials to receive a bearer token.
+
+**Configuration fields:**
+
+| Field | Description |
+|-------|-------------|
+| `token_exchange_username` | Username for token exchange (stored securely) |
+| `token_exchange_password` | Password for token exchange (stored securely) |
+| `token_exchange_endpoint` | API endpoint for exchanging credentials (e.g., `/api/authentication`) |
+| `token_exchange_method` | HTTP method for token exchange (POST or GET) |
+| `token_exchange_body` | JSON body template with variable substitution |
+| `token_response_path` | JSONPath to extract token from response (e.g., `accessToken`, `data.token`) |
+| `token_expiry_path` | Optional JSONPath to extract expiry timestamp (Unix timestamp) |
+| `token_expiry_buffer` | Seconds before expiry to refresh token (default: 300) |
+
+**Variable substitution:**
+
+The request body supports `${variable}` syntax for injecting sensitive values:
+- `${username}` - Injects the configured username
+- `${password}` - Injects the configured password
+
+**Example configuration:**
+
+```json
+{
+  "token_exchange_endpoint": "/api/authentication",
+  "token_exchange_method": "POST",
+  "token_exchange_body": "{\"strategy\": \"local\", \"login\": \"${username}\", \"password\": \"${password}\"}",
+  "token_response_path": "accessToken",
+  "token_expiry_path": "authentication.payload.exp",
+  "token_expiry_buffer": 300
+}
+```
+
+## Endpoint Configuration
+
+### Test Endpoint
+
+Configure a specific endpoint for testing connectivity. If not specified, the first custom tool is used.
+
+| Field | Description |
+|-------|-------------|
+| `test_endpoint` | Endpoint path for connection testing (e.g., `/api/health`) |
+| `test_params` | JSON object of query parameters to include in test request |
+
+### Introspection Endpoint
+
+Configure automatic schema discovery to help Humm understand your API's data structures.
+
+| Field | Description |
+|-------|-------------|
+| `introspection_endpoint` | Endpoint for schema discovery (e.g., `/api/data`) |
+| `introspection_params` | JSON query parameters for schema discovery (e.g., `{"limit": 1}`) |
+| `introspection_cache_ttl` | How long to cache introspection results in seconds (default: 3600) |
+| `introspection_max_depth` | Maximum nesting depth for nested objects (1-10, default: 3) |
+| `introspection_data_key` | Field name containing the data array (e.g., `data`, `results`, `items`) |
+
+## Configuring Custom Tools
+
+Custom tools define the API endpoints Humm can access. Each tool maps to a specific API operation.
+
+### Tool Definition Schema
+
+```json
+{
+  "name": "GET_CUSTOMERS",
+  "description": "Retrieve a list of customers with optional filtering",
+  "endpoint": "/api/v1/customers",
+  "method": "GET",
+  "parameters": [
+    {
+      "name": "limit",
+      "type": "integer",
+      "required": false,
+      "description": "Maximum number of results to return",
+      "default": 100
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "required": false,
+      "description": "Filter by customer status (active, inactive)"
+    }
+  ],
+  "query_parameters": ["limit", "status"],
+  "response_data_path": "data.customers"
+}
+```
+
+### Tool Fields
+
+| Field | Description |
+|-------|-------------|
+| `name` | Unique tool name (convention: `VERB_RESOURCE`, e.g., `GET_ORDERS`) |
+| `description` | Description for the AI explaining what this tool does |
+| `endpoint` | API endpoint path, supports path parameters like `/users/{user_id}` |
+| `method` | HTTP method: `GET`, `POST`, `PUT`, `PATCH`, or `DELETE` |
+| `parameters` | Array of parameter definitions |
+| `path_parameters` | Parameter names that appear in the endpoint URL |
+| `query_parameters` | Parameter names sent as query string |
+| `body_parameters` | Parameter names sent in request body |
+| `body_template` | Template for complex request bodies (supports `{param}` substitution) |
+| `response_data_path` | JSONPath to extract data from response (e.g., `data.records`) |
+| `enabled_by_default` | Whether tool is enabled when integration is configured |
+
+### Parameter Definition
+
+```json
+{
+  "name": "user_id",
+  "type": "string",
+  "required": true,
+  "description": "The unique identifier for the user",
+  "default": null
+}
+```
+
+### Example: Complete Tool Configuration
+
+```json
+{
+  "name": "SEARCH_ORDERS",
+  "description": "Search orders by date range and status. Returns order details including line items.",
+  "endpoint": "/api/v2/orders/search",
+  "method": "POST",
+  "parameters": [
+    {
+      "name": "start_date",
+      "type": "string",
+      "required": true,
+      "description": "Start date in ISO 8601 format (e.g., 2024-01-01)"
+    },
+    {
+      "name": "end_date",
+      "type": "string",
+      "required": true,
+      "description": "End date in ISO 8601 format"
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "required": false,
+      "description": "Order status filter (pending, shipped, delivered)"
+    },
+    {
+      "name": "limit",
+      "type": "integer",
+      "required": false,
+      "description": "Maximum results per page",
+      "default": 50
+    }
+  ],
+  "body_parameters": ["start_date", "end_date", "status"],
+  "query_parameters": ["limit"],
+  "response_data_path": "data.orders"
+}
+```
+
+### Path Parameters Example
+
+For endpoints with dynamic segments:
+
+```json
+{
+  "name": "GET_ORDER_DETAILS",
+  "description": "Get detailed information about a specific order",
+  "endpoint": "/api/v2/orders/{order_id}",
+  "method": "GET",
+  "parameters": [
+    {
+      "name": "order_id",
+      "type": "string",
+      "required": true,
+      "description": "The order ID to retrieve"
+    }
+  ],
+  "path_parameters": ["order_id"]
+}
+```

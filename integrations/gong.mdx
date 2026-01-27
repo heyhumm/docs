@@ -3,14 +3,56 @@ title: Gong
 description: Connect to Gong revenue intelligence platform.
 ---
 
-Gong captures customer interactions across phone, web conferencing, and email, then uses AI to deliver insights that help teams win more deals.
+Gong captures customer interactions across phone, web conferencing, and email, then uses AI to deliver insights that help teams win more deals. Connect Humm to analyze call transcripts, discover conversation patterns, and understand your team's customer interactions.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `GONG_LIST_CALLS` | List call recordings with filtering options |
-| `GONG_GET_CALL` | Get details and transcript for a specific call |
+| `GONG_LIST_USERS` | List all users in the workspace with pagination |
+| `GONG_GET_USERS` | Retrieve one or more users by their Gong user IDs |
+| `GONG_GET_CALL_TRANSCRIPTS` | Get call transcripts by call IDs or date range |
+| `GONG_LIST_DETAILED_CALLS` | List detailed call data with participants, briefs, and interaction stats |
+
+## Filter Parameters
+
+Most Gong tools accept a `filter` parameter to scope results. Common filter options:
+
+```json
+// Filter by date range
+{
+  "filter": {
+    "fromDateTime": "2025-01-01T00:00:00Z",
+    "toDateTime": "2025-01-31T23:59:59Z"
+  }
+}
+
+// Filter by specific call IDs
+{
+  "filter": {
+    "callIds": ["7782342274025937895", "7782342274025937896"]
+  }
+}
+
+// Filter by call owner (GONG_LIST_DETAILED_CALLS only)
+{
+  "filter": {
+    "fromDateTime": "2025-01-01T00:00:00Z",
+    "toDateTime": "2025-01-31T23:59:59Z",
+    "primaryUserIds": ["234599484848423"]
+  }
+}
+```
+
+## Pagination
+
+All list tools support cursor-based pagination. When a response contains more results, use the `cursor` value from the response in subsequent requests:
+
+```json
+{
+  "cursor": "eyJhbGciOiJIUzI1NiJ9.cursor_token"
+}
+```
 
 ## Authentication
 

@@ -1,0 +1,84 @@
+---
+title: Absorb
+description: Connect to Absorb LMS to track courses, enrollments, and learner progress.
+---
+
+Absorb is a Learning Management System (LMS) that helps organizations deliver and track training programs. Connect Humm to access courses, enrollments, users, groups, and learning paths.
+
+## Tools
+
+| Tool | Description |
+|------|-------------|
+| `ABSORB_LIST_COURSES` | List courses with pagination, filtering, and sorting |
+| `ABSORB_GET_COURSE` | Get detailed course information by ID |
+| `ABSORB_LIST_USER_ENROLLMENTS` | List a user's course enrollments with status and progress |
+| `ABSORB_GET_USER_ENROLLMENT` | Get a user's enrollment details for a specific course |
+| `ABSORB_LIST_USERS` | List learners with pagination and filtering |
+| `ABSORB_GET_USER` | Get detailed learner information by ID |
+| `ABSORB_LIST_GROUPS` | List organizational groups |
+| `ABSORB_GET_GROUP` | Get group details by ID |
+| `ABSORB_LIST_USER_LEARNING_PATHS` | List a user's assigned learning paths and curricula |
+
+## OData Filter Syntax
+
+Absorb uses OData filter syntax for querying data. All list tools support the `_filter` parameter.
+
+### Supported Operators
+
+- **Comparison**: `eq`, `ne`, `gt`, `ge`, `lt`, `le`
+- **Logical**: `and`, `or`, `not`, `()`
+- **Functions**: `substringof`, `endswith`, `startswith`, `tolower`, `toupper`
+
+### Filter Examples
+
+```
+# Users with last name starting with "Smith"
+startsWith(lastname, 'Smith')
+
+# Users added after a specific date
+dateAdded ge datetime'2024-01-01T00:00:00Z'
+
+# Combine multiple conditions
+startsWith(lastname, 'Smith') or dateAdded ge datetime'2024-01-01T00:00:00Z'
+
+# Search by email domain
+substringof('@example.com', emailAddress)
+
+# Filter by custom field
+customFields/string1 eq 'Department A'
+```
+
+## Pagination and Sorting
+
+All list tools support pagination and sorting parameters:
+
+| Parameter | Description |
+|-----------|-------------|
+| `_offset` | Page number (0-based). Default: 0 |
+| `_limit` | Items per page (max 1000). Default: 20 |
+| `_sort` | Sort field. Prefix with `-` for descending order |
+
+### Sorting Examples
+
+```
+# Sort by name ascending
+_sort=name
+
+# Sort by creation date descending
+_sort=-dateCreated
+
+# Multi-field sort
+_sort=lastname,firstname
+```
+
+## Authentication
+
+<Card title="Username + Password + API Key" icon="key">
+  Absorb uses custom authentication requiring three credentials:
+
+  - **Username**: Your Absorb account username
+  - **Password**: Your Absorb account password
+  - **Private API Key**: Obtain from Absorb Portal Settings
+
+  All three credentials are required to authenticate API requests.
+</Card>
