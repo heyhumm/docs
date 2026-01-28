@@ -25,6 +25,7 @@
             "pages": [
               "features/threads",
               "features/commands",
+              "features/scheduled-commands",
               "features/memories",
               "features/ontology"
             ]

@@ -1,0 +1,259 @@
+---
+title: Scheduled Commands
+description: Automate report generation by running saved commands on a regular schedule.
+---
+
+Scheduled Commands let you automate your recurring analyses. Instead of manually running the same command each week or month, schedule it once and Humm will run it automatically—delivering results straight to your inbox and your team's.
+
+## Why Use Scheduled Commands?
+
+Many reports need to run on a regular basis:
+- Weekly revenue and pipeline summaries
+- Daily active user metrics
+- Monthly customer health reviews
+- End-of-week team performance reports
+
+Without scheduling, you'd need to remember to run these reports manually. With Scheduled Commands, you configure it once and receive results automatically.
+
+## Creating a Schedule
+
+Before you can schedule a command, make sure you have a saved command ready to go.
+
+### Steps to Schedule
+
+1. Navigate to your saved command in **Commands**
+2. Click the **Schedule** button (calendar icon)
+3. Configure your schedule:
+   - **Cadence** — Daily, weekly, or monthly
+   - **Run Time** — When the report should execute
+   - **Timezone** — Your preferred timezone
+   - **Enabled** — Toggle to activate
+4. Click **Create Schedule**
+
+You'll automatically be subscribed to receive the reports.
+
+### Schedule Options
+
+<AccordionGroup>
+  <Accordion title="Cadence">
+    Choose how often your report runs:
+    - **Daily** — Runs every day at the specified time
+    - **Weekly** — Runs every Monday at the specified time
+    - **Monthly** — Runs on the 1st of each month
+  </Accordion>
+  <Accordion title="Timezone Support">
+    Pick from multiple timezones including Eastern, Central, Mountain, Pacific, UTC, London, and Central European time. Timezones that observe daylight saving automatically adjust, so your reports always run at the expected local time.
+  </Accordion>
+  <Accordion title="Run Time">
+    Select the exact time for execution. Consider your team's workflow:
+    - **Morning (8-10 AM)** — Start the day with fresh insights
+    - **End of day (4-6 PM)** — Daily summaries before close
+    - **Overnight (2-4 AM)** — Process heavy queries during off-peak hours
+  </Accordion>
+</AccordionGroup>
+
+## Managing Subscribers
+
+After creating a schedule, you can add team members to receive the same reports.
+
+### Adding Subscribers
+
+1. Open the schedule dialog
+2. Click **Add** in the Subscribers section
+3. Select team members from the dropdown
+4. They'll start receiving reports on the next run
+
+<Note>
+  Organization admins can add any team member. Non-admins can only subscribe themselves.
+</Note>
+
+### Removing Subscribers
+
+1. Open the schedule dialog
+2. Find the subscriber in the list
+3. Click the **X** button next to their name
+4. They'll stop receiving reports immediately
+
+## The Reports Inbox
+
+Access all your scheduled reports in one place by clicking **Reports** in the sidebar.
+
+### What You'll See
+
+Each report card shows:
+- Command name and description
+- Cadence badge (daily, weekly, monthly)
+- Latest run summary
+- Status indicators:
+  - 🟢 **Green dot** — New unread report
+  - 🔴 **Red alert** — Latest run failed
+  - **Faded** — Schedule is disabled
+
+### Reading Reports
+
+Click any report card to:
+- View the full report with all results and visualizations
+- Mark it as read (removes the unread indicator)
+- Access the complete conversation thread
+
+## Run History
+
+Every scheduled report maintains a complete history:
+
+1. Open a report from your inbox
+2. Click **View History**
+3. See all past runs with:
+   - Execution status (completed, failed, in progress)
+   - Start and completion times
+   - Full report content
+   - Error messages for failed runs
+
+## Email Notifications
+
+Stay informed without logging in—Humm sends email notifications when reports are ready.
+
+### Success Notifications
+
+When a report completes successfully, you'll receive:
+- Report name and AI-generated summary
+- Link to view the full report
+- Timestamp of execution
+- Link to manage preferences
+
+### Failure Notifications
+
+If a report fails, you'll receive:
+- Report name
+- Error message explaining what went wrong
+- Link to fix the issue
+- Link to manage preferences
+
+### Managing Email Preferences
+
+Control which notifications you receive:
+
+1. Click your profile icon
+2. Select **Notification Preferences**
+3. Toggle scheduled report notifications on or off
+
+You can also manage preferences via the link in any notification email.
+
+## Editing and Disabling Schedules
+
+### Editing a Schedule
+
+To modify an existing schedule:
+
+1. Open the schedule dialog
+2. Update any settings (cadence, time, timezone)
+3. Click **Save**
+
+<Note>
+  Only the schedule creator or organization admins can edit schedule settings.
+</Note>
+
+### Disabling vs. Deleting
+
+**Disable** to pause temporarily:
+- Schedule stays configured
+- No reports run while disabled
+- All subscribers remain subscribed
+- Re-enable anytime
+
+**Delete** to remove permanently:
+- All settings are lost
+- All subscribers are unsubscribed
+- Historical runs are deleted
+- Cannot be undone
+
+<Warning>
+  You cannot delete a schedule while runs are in progress. Wait for them to complete first.
+</Warning>
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Choose the Right Cadence" icon="calendar">
+    **Daily** for fast-moving metrics that need monitoring (active users, overnight sales)
+
+    **Weekly** for trend analysis and regular team updates (growth metrics, pipeline reports)
+
+    **Monthly** for high-level summaries and executive reporting (revenue, retention)
+  </Card>
+  <Card title="Time Your Reports Well" icon="clock">
+    **Morning** gives your team insights to start the day
+
+    **End-of-day** provides summaries before close
+
+    **Overnight** handles heavy queries during off-peak hours
+  </Card>
+  <Card title="Keep Subscribers Focused" icon="users">
+    Only add team members who need the specific report. Create multiple schedules with different cadences for different audiences (daily for ops, weekly for executives).
+  </Card>
+  <Card title="Handle Failures Quickly" icon="triangle-exclamation">
+    Check error messages in failure emails. Common causes: data source issues, deleted data, permission changes. Test the command manually to fix the issue.
+  </Card>
+</CardGroup>
+
+## Permissions
+
+### Who Can Schedule Commands
+
+- **Command creators** can schedule any command they created
+- **Organization admins** can schedule any command in the organization
+
+### Who Can Manage Schedules
+
+- **Schedule creator** has full control to edit or delete
+- **Organization admins** can manage any schedule
+
+### Who Can Subscribe
+
+- **Anyone** can subscribe themselves to existing schedules
+- **Admins** can subscribe other team members
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="I'm not receiving email notifications">
+    1. Check your **Notification Preferences** — ensure scheduled reports are enabled
+    2. Check your spam folder
+    3. Verify your email address in your profile
+    4. Confirm the run completed (failed runs send failure notifications)
+  </Accordion>
+  <Accordion title="Schedule isn't running at the expected time">
+    1. Verify the timezone setting matches your expectation
+    2. Check if the schedule is disabled
+    3. Remember: DST-observing timezones automatically adjust in March and November
+  </Accordion>
+  <Accordion title="Scheduled report is failing">
+    1. Review the error message in the failure notification
+    2. Run the command manually to reproduce the issue
+    3. Check data source connectivity in your integrations
+    4. Verify permissions on underlying data haven't changed
+    5. Contact support if the issue persists
+  </Accordion>
+  <Accordion title="I can't edit or delete a schedule">
+    Only the schedule creator or organization admins can edit or delete schedules. If you need changes and lack permissions, contact your admin or the schedule creator.
+  </Accordion>
+</AccordionGroup>
+
+## Frequently Asked Questions
+
+<AccordionGroup>
+  <Accordion title="Can I schedule a command multiple times per day?">
+    The minimum schedule interval is 15 minutes. You can create multiple schedules for the same command if you need different timing (e.g., one for morning, one for evening).
+  </Accordion>
+  <Accordion title="What happens if a run is still in progress when the next one is due?">
+    The system waits for the current run to complete before starting the next one. Runs never overlap.
+  </Accordion>
+  <Accordion title="Can I schedule commands with variables?">
+    Not currently. Scheduled commands must be fully automated. If your command has variables, set fixed values when you save the command for scheduling.
+  </Accordion>
+  <Accordion title="What happens to my subscriptions if the command is deleted?">
+    If a command is deleted, all associated schedules, subscriptions, and historical runs are also deleted.
+  </Accordion>
+  <Accordion title="How long is run history retained?">
+    All run history is retained indefinitely and accessible through the Reports Inbox.
+  </Accordion>
+</AccordionGroup>
