@@ -26,8 +26,10 @@ Before you can schedule a command, make sure you have a saved command ready to g
 3. Configure your schedule:
    - **Cadence** — Daily, weekly, weekdays, or monthly
    - **Run Mode** — Per Subscriber or Once & Distribute
+   - **Day** — For weekly or monthly, select which day to run
    - **Run Time** — When the report should execute
    - **Timezone** — Your preferred timezone
+   - **Run Mode** — How to execute for multiple subscribers
    - **Enabled** — Toggle to activate
 4. Click **Create Schedule**
 
@@ -39,9 +41,9 @@ You'll automatically be subscribed to receive the reports.
   <Accordion title="Cadence">
     Choose how often your report runs:
     - **Daily** — Runs every day at the specified time
-    - **Weekly** — Runs every Monday at the specified time
     - **Weekdays** — Runs Monday through Friday at the specified time
-    - **Monthly** — Runs on the 1st of each month
+    - **Weekly** — Runs once per week on your chosen day
+    - **Monthly** — Runs once per month on your chosen day (1-28)
   </Accordion>
   <Accordion title="Timezone Support">
     Pick from multiple timezones including Eastern, Central, Mountain, Pacific, UTC, London, and Central European time. Timezones that observe daylight saving automatically adjust, so your reports always run at the expected local time.
@@ -53,9 +55,9 @@ You'll automatically be subscribed to receive the reports.
     - **Overnight (2-4 AM)** — Process heavy queries during off-peak hours
   </Accordion>
   <Accordion title="Run Mode">
-    Choose how the scheduled command executes and distributes results:
-    - **Per Subscriber** — Runs the command once for each subscriber in their user context. Each subscriber receives personalized results based on their data access permissions.
-    - **Once & Distribute** — Runs the command once and distributes the same results to all subscribers. Ideal for organization-wide reports where everyone should see identical data.
+    Choose how reports execute when you have multiple subscribers:
+    - **Per Subscriber** (default) — Runs once for each subscriber using their individual data access and permissions. Best for personalized reports where each user sees data relevant to them.
+    - **Once & Distribute** — Runs once and distributes the same results to all subscribers. More efficient for reports where everyone should see identical content.
   </Accordion>
 </AccordionGroup>
 
@@ -92,9 +94,9 @@ Each report card shows:
 - Cadence badge (daily, weekly, weekdays, monthly)
 - Latest run summary
 - Status indicators:
-  - 🟢 **Green dot** — New unread report
-  - 🔴 **Red alert** — Latest run failed
-  - **Faded** — Schedule is disabled
+  - **Dot** — New unread report
+  - **Red alert icon** — Latest run failed
+  - **Faded appearance** — Schedule is disabled
 
 ### Reading Reports
 
