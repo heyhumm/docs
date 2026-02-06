@@ -57,7 +57,8 @@
                 "group": "Customer Success",
                 "pages": [
                   "integrations/churnzero",
-                  "integrations/intercom"
+                  "integrations/intercom",
+                  "integrations/zendesk"
                 ]
               },
               {
@@ -65,7 +66,8 @@
                 "pages": [
                   "integrations/pendo",
                   "integrations/mixpanel",
-                  "integrations/posthog"
+                  "integrations/posthog",
+                  "integrations/amplitude"
                 ]
               },
               {
@@ -73,6 +75,12 @@
                 "pages": [
                   "integrations/jira",
                   "integrations/linear"
+                ]
+              },
+              {
+                "group": "Billing & Subscriptions",
+                "pages": [
+                  "integrations/chargebee"
                 ]
               },
               {

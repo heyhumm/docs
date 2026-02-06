@@ -1,0 +1,102 @@
+---
+title: Amplitude
+description: Connect to Amplitude for product analytics, event segmentation, and user behavior data.
+---
+
+Amplitude is a product analytics platform that helps teams understand user behavior through event tracking, segmentation, and cohort analysis. Connect Humm to run aggregation queries, explore event types, and analyze user engagement.
+
+## Tools
+
+| Tool | Description |
+|------|-------------|
+| `AMPLITUDE_RUN_AGGREGATION` | Execute event segmentation queries with metrics, filtering, grouping, and date ranges |
+| `AMPLITUDE_LIST_COHORTS` | List all cohorts in the Amplitude project |
+| `AMPLITUDE_GET_EVENT_TYPES` | Retrieve all event types in the project |
+| `AMPLITUDE_GET_EVENT_CATEGORIES` | Retrieve all event categories |
+| `AMPLITUDE_FIND_USER` | Search for users by Amplitude ID, device ID, or user ID |
+
+## Aggregation Queries
+
+The `AMPLITUDE_RUN_AGGREGATION` tool is the primary way to query Amplitude data. It supports event segmentation with flexible metrics and grouping.
+
+### Metrics
+
+| Metric | Description |
+|--------|-------------|
+| `uniques` | Unique users (default) |
+| `totals` | Total event count |
+| `pct_dau` | Percentage of daily active users |
+| `average` | Average events per user |
+| `sums` | Sum of event property values |
+| `value_avg` | Average of event property values |
+| `formula` | Custom formula across two events |
+
+### Parameters
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `e` | Yes | Primary event definition (event type, filters, group-by) |
+| `start` | Yes | Start date in `YYYYMMDD` format |
+| `end` | Yes | End date in `YYYYMMDD` format |
+| `m` | No | Metric type (default: `uniques`) |
+| `i` | No | Time interval: `1` (daily), `7` (weekly), `30` (monthly), `-3600000` (hourly) |
+| `g` | No | Primary group-by property |
+| `s` | No | Segment filters on user population |
+| `e2` | No | Second event (for formula queries) |
+| `formula` | No | Custom formula (requires `m=formula` and both `e`/`e2`) |
+
+### Event Definition
+
+```json
+{
+  "event_type": "Purchase",
+  "filters": [
+    {
+      "subprop_type": "event",
+      "subprop_key": "category",
+      "subprop_op": "is",
+      "subprop_value": ["Electronics"]
+    }
+  ]
+}
+```
+
+### Special Event Types
+
+| Event Type | Description |
+|------------|-------------|
+| `_active` | Any active event |
+| `_all` | All events |
+| `ce:name` | Custom events (prefix with `ce:`) |
+
+### Group-By Properties
+
+Built-in properties: `country`, `city`, `region`, `platform`, `os`, `device_type`, `version`, `paying`.
+
+For custom properties, use the `gp:` prefix (e.g., `gp:plan_name`).
+
+### Filter Operators
+
+| Operator | Description |
+|----------|-------------|
+| `is` / `is not` | Exact match |
+| `contains` / `does not contain` | Substring match |
+| `less` / `greater` | Numeric comparison |
+| `less or equal` / `greater or equal` | Numeric comparison |
+| `set is` / `set is not` | Set membership |
+
+### Query Constraints
+
+| Interval | Max Date Range |
+|----------|----------------|
+| Real-time (`-300000`) | 2 days |
+| Hourly (`-3600000`) | 7 days |
+| Daily (`1`) | 365 days |
+
+Rate limit: 5 concurrent queries.
+
+## Authentication
+
+<Card title="OAuth" icon="plug">
+  Connect securely via OAuth. Authorize Humm to access your Amplitude project.
+</Card>

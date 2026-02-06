@@ -1,0 +1,65 @@
+---
+title: Zendesk
+description: Connect to Zendesk for customer support tickets, users, and organizations.
+---
+
+Zendesk is a customer service platform that helps businesses manage support tickets, customer conversations, and service operations. Connect Humm to access tickets, users, organizations, and comments from your Zendesk account.
+
+## Tools
+
+| Tool | Description |
+|------|-------------|
+| `ZENDESK_LIST_TICKETS` | List all tickets with optional sorting by field and direction |
+| `ZENDESK_GET_TICKET` | Get a single ticket by ID with full details |
+| `ZENDESK_LIST_USERS` | List all users with optional role filtering (end-user, agent, admin) |
+| `ZENDESK_GET_USER` | Get a single user by ID |
+| `ZENDESK_LIST_ORGANIZATIONS` | List all organizations in the account |
+| `ZENDESK_GET_ORGANIZATION` | Get a single organization by ID |
+| `ZENDESK_GET_TICKET_COMMENTS` | Get all comments (public and private) for a specific ticket |
+
+## Sorting Tickets
+
+The `ZENDESK_LIST_TICKETS` tool supports sorting by the following fields:
+
+| Sort Field | Description |
+|------------|-------------|
+| `assignee` | Assigned agent |
+| `created_at` | Creation date |
+| `id` | Ticket ID |
+| `status` | Ticket status |
+| `subject` | Ticket subject |
+| `updated_at` | Last update date |
+
+Set `sort_order` to `asc` (ascending) or `desc` (descending).
+
+## Filtering Users
+
+The `ZENDESK_LIST_USERS` tool supports filtering by role:
+
+| Role | Description |
+|------|-------------|
+| `end-user` | Customers who submit tickets |
+| `agent` | Support agents who handle tickets |
+| `admin` | Account administrators |
+
+## Discoverable Objects
+
+Humm can introspect the following Zendesk objects during schema discovery:
+
+- **Ticket** — Support tickets with status, priority, type, and assignment info
+- **User** — End users, agents, and administrators
+- **Organization** — Customer organizations with domain associations
+- **Group** — Agent groups for ticket assignment
+- **Ticket Comment** — Comments and replies on tickets
+- **Ticket Field** — Custom and system ticket fields
+- **Ticket Form** — Ticket submission forms
+- **View** — Saved ticket views and filters
+- **Macro** — Predefined ticket responses and actions
+- **Tag** — Tags for categorizing tickets
+- **Satisfaction Rating** — Customer satisfaction survey responses
+
+## Authentication
+
+<Card title="OAuth" icon="plug">
+  Connect securely via OAuth. Authorize Humm to access your Zendesk account.
+</Card>

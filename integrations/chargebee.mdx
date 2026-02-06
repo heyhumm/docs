@@ -1,0 +1,83 @@
+---
+title: Chargebee
+description: Connect to Chargebee for subscription billing, invoices, and customer data.
+---
+
+Chargebee is a subscription billing and revenue management platform that automates recurring billing, invoicing, and revenue operations. Connect Humm to access customers, subscriptions, invoices, transactions, and product catalog data.
+
+## Tools
+
+| Tool | Description |
+|------|-------------|
+| `CHARGEBEE_LIST_CUSTOMERS` | List customers with filtering by email and creation date |
+| `CHARGEBEE_GET_CUSTOMER` | Get customer details by ID |
+| `CHARGEBEE_LIST_SUBSCRIPTIONS` | List subscriptions with filtering by customer and status |
+| `CHARGEBEE_GET_SUBSCRIPTION` | Get subscription details by ID |
+| `CHARGEBEE_LIST_INVOICES` | List invoices with filtering by customer, status, and date |
+| `CHARGEBEE_GET_INVOICE` | Get invoice details by ID |
+| `CHARGEBEE_LIST_CREDIT_NOTES` | List credit notes with filtering by customer and status |
+| `CHARGEBEE_GET_CREDIT_NOTE` | Get credit note by ID |
+| `CHARGEBEE_LIST_TRANSACTIONS` | List transactions with filtering by customer and type |
+| `CHARGEBEE_LIST_PAYMENT_SOURCES` | List payment methods with filtering by customer, type, and status |
+| `CHARGEBEE_LIST_ORDERS` | List orders with filtering by customer and status |
+| `CHARGEBEE_GET_ORDER` | Get order by ID |
+| `CHARGEBEE_LIST_ITEMS` | List products (plans, addons, charges) with filtering by type |
+| `CHARGEBEE_GET_ITEM` | Get item by ID |
+| `CHARGEBEE_LIST_ITEM_PRICES` | List pricing configurations with filtering by item, type, and status |
+| `CHARGEBEE_GET_ITEM_PRICE` | Get item price by ID |
+| `CHARGEBEE_LIST_COUPONS` | List coupons with filtering by status and discount type |
+| `CHARGEBEE_GET_COUPON` | Get coupon by ID |
+| `CHARGEBEE_LIST_EVENTS` | List webhook events with filtering by event type and timestamp |
+
+## Pagination
+
+All list tools support pagination parameters:
+
+| Parameter | Description |
+|-----------|-------------|
+| `limit` | Items per page (1–100, default 10) |
+| `offset` | Cursor from previous response's `next_offset` for next page |
+| `sort_by` | Sort field (e.g., `created_at`, `updated_at`). Prefix with `-` for descending |
+
+## Filtering
+
+Chargebee tools use named filter parameters. Common filters include:
+
+| Filter | Description |
+|--------|-------------|
+| `email_is` | Exact email match |
+| `customer_id_is` | Filter by customer ID |
+| `status_is` | Filter by status |
+| `type_is` | Filter by type |
+| `created_at_after` | Created after Unix timestamp |
+| `item_id_is` | Filter by item ID |
+| `event_type_is` | Filter by event type |
+
+### Status Values by Resource
+
+| Resource | Statuses |
+|----------|----------|
+| Subscription | `active`, `cancelled`, `non_renewing`, `future`, `paused`, `in_trial` |
+| Invoice | `paid`, `posted`, `payment_due`, `not_paid`, `voided`, `pending` |
+| Credit Note | `adjusted`, `refunded`, `refund_due`, `voided` |
+| Order | `new`, `processing`, `complete`, `cancelled`, `voided`, `shipped`, `delivered`, `returned` |
+| Item Price | `active`, `archived`, `deleted` |
+| Coupon | `active`, `expired`, `archived`, `deleted` |
+
+### Type Values by Resource
+
+| Resource | Types |
+|----------|-------|
+| Transaction | `payment`, `refund`, `authorization` |
+| Payment Source | `card`, `paypal_express_checkout`, `amazon_payments`, `direct_debit`, `bank_account` |
+| Item | `plan`, `addon`, `charge` |
+| Coupon Discount | `fixed_amount`, `percentage` |
+
+## Authentication
+
+<Card title="API Key" icon="key">
+  Connect using your Chargebee site name and API key.
+
+  - **Site**: Your Chargebee subdomain (from `yoursite.chargebee.com`)
+  - **API Key**: Obtain from Chargebee Settings > Configure Chargebee > API Keys
+</Card>
