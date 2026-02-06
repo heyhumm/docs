@@ -24,7 +24,8 @@ Before you can schedule a command, make sure you have a saved command ready to g
 1. Navigate to your saved command in **Commands**
 2. Click the **Schedule** button (calendar icon)
 3. Configure your schedule:
-   - **Cadence** — Daily, weekdays, weekly, or monthly
+   - **Cadence** — Daily, weekly, weekdays, or monthly
+   - **Run Mode** — Per Subscriber or Once & Distribute
    - **Day** — For weekly or monthly, select which day to run
    - **Run Time** — When the report should execute
    - **Timezone** — Your preferred timezone
@@ -90,7 +91,7 @@ Access all your scheduled reports in one place by clicking **Reports** in the si
 
 Each report card shows:
 - Command name and description
-- Cadence badge (daily, weekly, monthly)
+- Cadence badge (daily, weekly, weekdays, monthly)
 - Latest run summary
 - Status indicators:
   - **Dot** — New unread report
@@ -186,7 +187,14 @@ To modify an existing schedule:
 
     **Weekly** for trend analysis and regular team updates (growth metrics, pipeline reports)
 
+    **Weekdays** for business-day reports (skipping weekends)
+
     **Monthly** for high-level summaries and executive reporting (revenue, retention)
+  </Card>
+  <Card title="Choose the Right Run Mode" icon="users">
+    **Per Subscriber** for personalized reports where each user sees data based on their permissions (e.g., regional sales for different sales reps)
+
+    **Once & Distribute** for organization-wide reports where everyone sees identical data (e.g., company-wide KPIs)
   </Card>
   <Card title="Time Your Reports Well" icon="clock">
     **Morning** gives your team insights to start the day
