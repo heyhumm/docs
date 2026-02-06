@@ -23,6 +23,23 @@ Most integrations take just a few minutes to set up. Once connected, Humm automa
 
 ---
 
+## Multiple Instances of the Same Integration
+
+For supported integrations, you can connect multiple instances of the same connector. This is useful when:
+
+- You have separate accounts for different regions (e.g., US and EU)
+- You manage different business units separately
+- You need to query data from sandbox and production environments
+
+When you connect multiple instances, Humm automatically qualifies tool names with the instance label to distinguish them. For example, if you connect two Chargebee instances labeled "US" and "EU":
+
+- `CHARGEBEE_US_LIST_CUSTOMERS` — List customers from the US instance
+- `CHARGEBEE_EU_LIST_CUSTOMERS` — List customers from the EU instance
+
+This prevents confusion and ensures queries use the correct data source.
+
+---
+
 ## Available Integrations
 
 ### Data Warehouses

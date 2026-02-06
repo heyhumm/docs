@@ -24,7 +24,8 @@ Before you can schedule a command, make sure you have a saved command ready to g
 1. Navigate to your saved command in **Commands**
 2. Click the **Schedule** button (calendar icon)
 3. Configure your schedule:
-   - **Cadence** — Daily, weekly, or monthly
+   - **Cadence** — Daily, weekly, weekdays, or monthly
+   - **Run Mode** — Per Subscriber or Once & Distribute
    - **Run Time** — When the report should execute
    - **Timezone** — Your preferred timezone
    - **Enabled** — Toggle to activate
@@ -39,6 +40,7 @@ You'll automatically be subscribed to receive the reports.
     Choose how often your report runs:
     - **Daily** — Runs every day at the specified time
     - **Weekly** — Runs every Monday at the specified time
+    - **Weekdays** — Runs Monday through Friday at the specified time
     - **Monthly** — Runs on the 1st of each month
   </Accordion>
   <Accordion title="Timezone Support">
@@ -49,6 +51,11 @@ You'll automatically be subscribed to receive the reports.
     - **Morning (8-10 AM)** — Start the day with fresh insights
     - **End of day (4-6 PM)** — Daily summaries before close
     - **Overnight (2-4 AM)** — Process heavy queries during off-peak hours
+  </Accordion>
+  <Accordion title="Run Mode">
+    Choose how the scheduled command executes and distributes results:
+    - **Per Subscriber** — Runs the command once for each subscriber in their user context. Each subscriber receives personalized results based on their data access permissions.
+    - **Once & Distribute** — Runs the command once and distributes the same results to all subscribers. Ideal for organization-wide reports where everyone should see identical data.
   </Accordion>
 </AccordionGroup>
 
@@ -82,7 +89,7 @@ Access all your scheduled reports in one place by clicking **Reports** in the si
 
 Each report card shows:
 - Command name and description
-- Cadence badge (daily, weekly, monthly)
+- Cadence badge (daily, weekly, weekdays, monthly)
 - Latest run summary
 - Status indicators:
   - 🟢 **Green dot** — New unread report
@@ -178,7 +185,14 @@ To modify an existing schedule:
 
     **Weekly** for trend analysis and regular team updates (growth metrics, pipeline reports)
 
+    **Weekdays** for business-day reports (skipping weekends)
+
     **Monthly** for high-level summaries and executive reporting (revenue, retention)
+  </Card>
+  <Card title="Choose the Right Run Mode" icon="users">
+    **Per Subscriber** for personalized reports where each user sees data based on their permissions (e.g., regional sales for different sales reps)
+
+    **Once & Distribute** for organization-wide reports where everyone sees identical data (e.g., company-wide KPIs)
   </Card>
   <Card title="Time Your Reports Well" icon="clock">
     **Morning** gives your team insights to start the day
